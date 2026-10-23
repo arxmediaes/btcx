@@ -1,0 +1,244 @@
+{
+  "checkedAt": 1791658249316,
+  "profiles": [
+    {
+      "name": "BullishBanter",
+      "checkedAt": 1791658249314,
+      "posts": 3,
+      "coins": [
+        "STRK",
+        "CFX",
+        "NEAR"
+      ],
+      "signals": [
+        {
+          "id": "375793844478493",
+          "creator": "BullishBanter",
+          "symbol": "NEAR",
+          "side": -1,
+          "publishedAt": 1791637744000,
+          "url": "https://www.binance.com/en/square/post/375793844478493",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 5.3,
+          "stop": 5.63,
+          "target": 5.05
+        }
+      ]
+    },
+    {
+      "name": "Top Traders",
+      "checkedAt": 1791658249314,
+      "posts": 0,
+      "coins": [],
+      "signals": []
+    },
+    {
+      "name": "TRADER TOPPER",
+      "checkedAt": 1791658249314,
+      "posts": 0,
+      "coins": [],
+      "signals": []
+    },
+    {
+      "name": "PhoenixTraderpro",
+      "checkedAt": 1791658249316,
+      "posts": 20,
+      "coins": [
+        "INJ",
+        "CAP",
+        "ARPA",
+        "RLC",
+        "STRK",
+        "BTC",
+        "CTSI",
+        "LUMIA",
+        "CHIP",
+        "SNDK",
+        "UMA",
+        "ETH",
+        "NEAR",
+        "STRAX",
+        "WLD"
+      ],
+      "signals": [
+        {
+          "id": "375866775443296",
+          "creator": "PhoenixTraderpro",
+          "symbol": "INJ",
+          "side": 1,
+          "publishedAt": 1791655549000,
+          "url": "https://www.binance.com/en/square/post/375866775443296",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 7.6,
+          "stop": 7.38,
+          "target": 7.8
+        },
+        {
+          "id": "375865106949332",
+          "creator": "PhoenixTraderpro",
+          "symbol": "ARPA",
+          "side": 1,
+          "publishedAt": 1791655142000,
+          "url": "https://www.binance.com/en/square/post/375865106949332",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 0.01221,
+          "stop": 0.01163,
+          "target": 0.0126
+        },
+        {
+          "id": "375864292314831",
+          "creator": "PhoenixTraderpro",
+          "symbol": "RLC",
+          "side": 1,
+          "publishedAt": 1791654943000,
+          "url": "https://www.binance.com/en/square/post/375864292314831",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 1.02,
+          "stop": 0.99,
+          "target": 1.08
+        },
+        {
+          "id": "375862659651285",
+          "creator": "PhoenixTraderpro",
+          "symbol": "STRK",
+          "side": 1,
+          "publishedAt": 1791654544000,
+          "url": "https://www.binance.com/en/square/post/375862659651285",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 0.0855,
+          "stop": 0.0835,
+          "target": 0.0897
+        },
+        {
+          "id": "375861039279021",
+          "creator": "PhoenixTraderpro",
+          "symbol": "CTSI",
+          "side": 1,
+          "publishedAt": 1791654149000,
+          "url": "https://www.binance.com/en/square/post/375861039279021",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 0.0358,
+          "stop": 0.0348,
+          "target": 0.0395
+        },
+        {
+          "id": "375860245520749",
+          "creator": "PhoenixTraderpro",
+          "symbol": "LUMIA",
+          "side": -1,
+          "publishedAt": 1791653955000,
+          "url": "https://www.binance.com/en/square/post/375860245520749",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 0.1075,
+          "stop": 0.1222,
+          "target": 0.1
+        },
+        {
+          "id": "375859380910267",
+          "creator": "PhoenixTraderpro",
+          "symbol": "CHIP",
+          "side": 1,
+          "publishedAt": 1791653744000,
+          "url": "https://www.binance.com/en/square/post/375859380910267",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 0.0545,
+          "stop": 0.0539,
+          "target": 0.0563
+        },
+        {
+          "id": "375858564587045",
+          "creator": "PhoenixTraderpro",
+          "symbol": "SNDK",
+          "side": -1,
+          "publishedAt": 1791653544000,
+          "url": "https://www.binance.com/en/square/post/375858564587045",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 1594.91,
+          "stop": 1610.76,
+          "target": 1583.86
+        },
+        {
+          "id": "375857683045631",
+          "creator": "PhoenixTraderpro",
+          "symbol": "INJ",
+          "side": 1,
+          "publishedAt": 1791653329000,
+          "url": "https://www.binance.com/en/square/post/375857683045631",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 7.546,
+          "stop": 7.3,
+          "target": 8.0
+        },
+        {
+          "id": "375856913471828",
+          "creator": "PhoenixTraderpro",
+          "symbol": "STRK",
+          "side": 1,
+          "publishedAt": 1791653141000,
+          "url": "https://www.binance.com/en/square/post/375856913471828",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 0.092,
+          "stop": 0.089,
+          "target": 0.097
+        },
+        {
+          "id": "375853700868980",
+          "creator": "PhoenixTraderpro",
+          "symbol": "RLC",
+          "side": 1,
+          "publishedAt": 1791652357000,
+          "url": "https://www.binance.com/en/square/post/375853700868980",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 1.0086,
+          "stop": 0.8756,
+          "target": 1.08
+        },
+        {
+          "id": "375852874293288",
+          "creator": "PhoenixTraderpro",
+          "symbol": "STRAX",
+          "side": -1,
+          "publishedAt": 1791652155000,
+          "url": "https://www.binance.com/en/square/post/375852874293288",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 0.01064,
+          "stop": 0.011,
+          "target": 0.00949
+        },
+        {
+          "id": "375851201690746",
+          "creator": "PhoenixTraderpro",
+          "symbol": "WLD",
+          "side": 1,
+          "publishedAt": 1791651747000,
+          "url": "https://www.binance.com/en/square/post/375851201690746",
+          "excerpt": "Revisi\u00f3n manual de publicaci\u00f3n p\u00fablica; niveles originales solo como referencia.",
+          "entry": 0.56,
+          "stop": 0.515,
+          "target": 0.65
+        }
+      ]
+    },
+    {
+      "name": "Cryptorphic",
+      "checkedAt": 1791658249316,
+      "posts": 0,
+      "coins": [],
+      "signals": []
+    },
+    {
+      "name": "TF_BTC",
+      "checkedAt": 1791658249316,
+      "posts": 0,
+      "coins": [],
+      "signals": []
+    },
+    {
+      "name": "TradeSetups",
+      "checkedAt": 1791658249316,
+      "posts": 0,
+      "coins": [],
+      "signals": []
+    }
+  ]
+}
