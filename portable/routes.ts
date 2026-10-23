@@ -1,0 +1,14 @@
+import * as route0 from '../app/api/binance/connection/route.ts';
+import * as route1 from '../app/api/binance-v2/route.ts';
+import * as route2 from '../app/api/binance-v2-fast/route.ts';
+import * as route3 from '../app/api/binance-v2-stops/route.ts';
+import * as route4 from '../app/api/binance-v2-strategies/route.ts';
+import * as route5 from '../app/api/binance-v2-swing/route.ts';
+import * as route6 from '../app/api/binance-v3/route.ts';
+import * as route7 from '../app/api/kraken/route.ts';
+import * as route8 from '../app/api/market/route.ts';
+import * as route9 from '../app/api/real-history/route.ts';
+import * as route11 from '../app/api/square/route.ts';
+import * as route12 from '../app/api/state/route.ts';
+export const project='hyrule';
+export const routes={"/api/binance/connection":route0,"/api/binance-v2":route1,"/api/binance-v2-fast":route2,"/api/binance-v2-stops":route3,"/api/binance-v2-strategies":route4,"/api/binance-v2-swing":route5,"/api/binance-v3":route6,"/api/kraken":route7,"/api/market":route8,"/api/real-history":route9,"/api/square":route11,"/api/state":route12};

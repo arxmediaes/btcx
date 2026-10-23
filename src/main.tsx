@@ -1,0 +1,12 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {Access} from '../portable/access';
+import {installApiTransport} from '../portable/client';
+import '../app/globals.css';
+import '../portable/access.css';
+import App from '../app/page';
+import Laboratory from '../app/binance-v2/page';
+const params=new URLSearchParams(location.search);
+installApiTransport();
+document.addEventListener('click',e=>{const a=(e.target as Element).closest('a');if(!a)return;const href=a.getAttribute('href');const routes:Record<string,string>={'/':'','/binance-2':'?profile=secondary','/binance-v2':'?view=binance-v2'};if(href!==null&&href in routes){e.preventDefault();const next=import.meta.env.BASE_URL+routes[href];if(a.target==='_blank')window.open(next,'_blank','noopener');else location.href=next;}});
+createRoot(document.getElementById('root')!).render(<Access name="HYRULE">{()=>params.get('view')==='binance-v2'?<Laboratory/>:<App binanceProfile={params.get('profile')==='secondary'?'secondary':'primary'}/>}</Access>);
