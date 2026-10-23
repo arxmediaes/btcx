@@ -1,0 +1,15 @@
+import {STRATEGIES,signal,indicators,emaRegime,type Candle} from './engine';
+import {marketPulse} from './pulse';
+import {multiTimeframeAnalysis} from './multiframe';
+import {quickScalpReady} from './real-entry-gate';
+// The account radar's fresh-round strategy scores (strategy memory starts empty).
+export function v2NormalChoices(primary:Candle[]){const pulse=marketPulse(primary,[],'');return STRATEGIES.map(st=>({strategy:st.id,signal:signal(primary,st.id),score:0})).map(x=>({...x,score:(x.signal.side?3:0)+(x.signal.side&&pulse.bias===x.signal.side?1:0)})).sort((a,b)=>b.score-a.score)}
+export function v2NormalGate(primary:Candle[],context:Candle[],extra:Record<string,Candle[]>|undefined,strategy:string,side:1|-1){
+ const frames={'3m':primary,'15m':context,...extra},multi=multiTimeframeAnalysis(frames,'scalp',strategy,'3m'),pulse=marketPulse(primary,context,'15m'),ps=signal(primary,strategy),higher=multi.frames.filter(f=>['1h','4h','1d','1w'].includes(f.tf)),higherAligned=higher.length?higher.filter(f=>f.direction===side).length/higher.length:0;
+ const slices=[primary.slice(-80),primary.slice(-160,-80),primary.slice(-240,-160)].filter(x=>x.length>=65),history=slices.map(rows=>{const a=indicators(rows),regime=emaRegime(rows,a),difference=rows.at(-1)!.c-rows[0].c,atr=a.atr.at(-1)!;return regime.strong?regime.side:difference>atr*.8?1:difference<-atr*.8?-1:0}).filter(x=>x!==0),agreement=history.length?history.filter(x=>x===side).length/history.length:0,regime=emaRegime(primary),historicalSide=regime.side||history.at(-1)||0,aligned=historicalSide===side||agreement>=.5,frameAgreement=multi.frames.length?multi.frames.filter(f=>f.direction===side).length/multi.frames.length:0;
+ const confluence=Math.min(100,(aligned?24:Math.round(agreement*18))+Math.round(frameAgreement*24)+Math.round(higherAligned*12)+(multi.bias===side?16:multi.bias===0?8:0)+(pulse.bias===side?16:pulse.bias===0?8:0)+(ps.side===side?8:ps.side===0?4:0));
+ const contextRegime=context.length>=65?emaRegime(context):null,contextOpposes=!!contextRegime?.strong&&contextRegime.side!==side,confirmed=ps.side===side;
+ const quality=primary.length>=35&&multi.frames.length>=1&&pulse.fomo.score<95&&multi.confidence>=20&&(confluence>=20||regime.strong&&aligned&&confluence>=25),quick=quickScalpReady({primaryCount:primary.length,contextCount:context.length,primaryConfirmed:confirmed,minuteConfirmed:false,pulseOpposes:pulse.bias===-side,contextOpposes,confluence,fomo:pulse.fomo.score});
+ const accepted=quick||(quality&&confirmed&&!contextOpposes&&context.length>=65);
+ return {accepted,confluence,frames:multi.frames.map(f=>({tf:f.tf,direction:f.direction,signal:f.signal,rsi3:f.rsi3,adx5:f.adx5,confidence:f.confidence})),reason:primary.length<65||context.length<65?'Faltan velas para el motor Binance':contextOpposes?'Contexto EMA de 15m contrario':!confirmed?'Sin señal confirmada de la estrategia normal':pulse.fomo.score>=95?'FOMO superior al límite del motor Binance':'Confluencia insuficiente del motor Binance'};
+}

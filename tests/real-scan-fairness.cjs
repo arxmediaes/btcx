@@ -1,0 +1,20 @@
+const fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript'),assert=require('node:assert/strict');
+const moduleSource={exports:{}};vm.runInNewContext(ts.transpile(fs.readFileSync('lib/real-cycle.ts','utf8'),{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}),{module:moduleSource,exports:moduleSource.exports});
+const {readyRealReservation,nextRealScanCandidate}=moduleSource.exports;
+const now=1800000000000,pending={A:{scheduledAt:now-10000},B:{scheduledAt:now-5000},C:{scheduledAt:now+1000},D:{scheduledAt:now-60001}};
+assert.equal(readyRealReservation(pending,new Set(),{A:now+3000},now)[0],'B');
+assert.equal(readyRealReservation(pending,new Set(['B']),{A:now+3000},now),undefined);
+assert.equal(readyRealReservation(pending,new Set(),{A:now+3000},now+3000)[0],'A');
+let cursor=0;const visits=[];for(let i=0;i<6;i++){const result=nextRealScanCandidate([{symbol:'A'},{symbol:'C'},{symbol:'B'}],['A','B','C'],cursor);visits.push(result.candidate.symbol);cursor=result.cursor;}
+assert.equal(visits.join(','),'A,B,C,A,B,C');
+assert.equal(nextRealScanCandidate([{symbol:'C'}],['A','B','C'],1).candidate.symbol,'C');
+assert.equal(nextRealScanCandidate([],['A','B','C'],1).candidate,undefined);
+const page=fs.readFileSync('app/page.tsx','utf8');assert.ok(page.includes('const pendingDue=readyRealReservation('));assert.ok(page.includes('const ranked=restrictedMotor?fairScan.candidate:'));
+console.log('PASS: blocked due entries yield to other reservations; expired, future and occupied reservations cannot execute; all eligible symbols get a turn despite ranking. No exchange calls.');
+const {realReservationLeadWait}=moduleSource.exports;
+assert.equal(realReservationLeadWait({A:{scheduledAt:now+2000}},new Set(),now),2000);
+assert.equal(realReservationLeadWait({A:{scheduledAt:now+2000}},new Set(['A']),now),0);
+assert.equal(realReservationLeadWait({A:{scheduledAt:now+9000}},new Set(),now),0);
+assert.equal(realReservationLeadWait({A:{scheduledAt:now-100}},new Set(),now),0);
+assert.ok(page.includes('if(!pendingDue&&reservationWait){scheduleRealRefill(reservationWait);return;}'));
+console.log('PASS: a reservation due within 8 seconds takes precedence over new slow discovery; occupied, distant and already-due entries do not cause a wait.');

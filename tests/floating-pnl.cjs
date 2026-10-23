@@ -1,0 +1,7 @@
+const fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript'),assert=require('node:assert/strict');const m={exports:{}};vm.runInNewContext(ts.transpile(fs.readFileSync('lib/floating-pnl.ts','utf8'),{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}),{module:m,exports:m.exports});const {summarizeOpenPnl,clampPanel}=m.exports;
+const position=(symbol,quantity,unrealizedProfit)=>({symbol,quantity,unrealizedProfit});
+let s=summarizeOpenPnl([position('ADAUSDT',2,.1),position('ETHUSDT',-.01,.35),position('XRPUSDT',0,50)]);assert.equal(s.count,2);assert.equal(s.best.symbol,'ETH');assert.equal(s.best.pnl,.35);
+s=summarizeOpenPnl([position('ADAUSDT',2,-.2),position('ETHUSDT',1,-.1)]);assert.equal(s.best.symbol,'ETH');assert.equal(s.best.pnl,-.1);
+s=summarizeOpenPnl([]);assert.equal(s.count,0);assert.equal(s.best,null);assert.equal(summarizeOpenPnl(undefined).count,null);assert.equal(summarizeOpenPnl([position('ADAUSDT',1,NaN)]).best,null);
+let p=clampPanel(-100,900,250,155,390,844);assert.equal(p.x,8);assert.equal(p.y,681);p=clampPanel(1000,-50,250,155,844,390);assert.equal(p.x,586);assert.equal(p.y,8);p=clampPanel(1000,1000,250,155,390,844);assert.equal(p.x+250<=382,true);assert.equal(p.y+155<=836,true);
+console.log('PASS: highest current open P&L (LONG or SHORT), zero-quantity excluded, losses preserved, no positions vs unknown distinct; drag clamped inside portrait and landscape screen. No exchange calls.');

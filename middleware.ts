@@ -1,0 +1,5 @@
+import {NextRequest,NextResponse} from 'next/server';
+import {ACCESS_COOKIE} from './lib/access-token';
+import {hasSiteAccess} from './lib/site-access';
+export async function middleware(request:NextRequest){const path=request.nextUrl.pathname;if(path==='/access'||path==='/api/site-access'||path.startsWith('/_next/')||path.startsWith('/assets/')||path==='/favicon.svg'||['/signin-with-chatgpt','/signout-with-chatgpt','/callback'].includes(path))return NextResponse.next();if(await hasSiteAccess(request.cookies.get(ACCESS_COOKIE)?.value))return NextResponse.next();if(path.startsWith('/api/'))return NextResponse.json({error:'Acceso bloqueado. Abre la página para introducir la contraseña.'},{status:423,headers:{'Cache-Control':'no-store'}});const url=new URL('/access',request.url);url.searchParams.set('return_to',path+request.nextUrl.search);const response=NextResponse.redirect(url);response.headers.set('Cache-Control','no-store');return response;}
+export const config={matcher:['/((?!_next/|assets/|favicon.svg).*)']};

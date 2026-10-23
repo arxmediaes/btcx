@@ -1,0 +1,9 @@
+const encoder=new TextEncoder();
+export const ACCESS_COOKIE='hyrule_access';
+export const ACCESS_DURATION=24*60*60*1000;
+function bytes(value:Uint8Array){return btoa(String.fromCharCode(...value)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+async function mac(value:string,secret:string){const key=await crypto.subtle.importKey('raw',encoder.encode('hyrule-gate-v1:'+secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);return bytes(new Uint8Array(await crypto.subtle.sign('HMAC',key,encoder.encode(value))));}
+export async function samePassword(candidate:string,expected:string){if(!candidate||!expected||candidate.length>128)return false;const [a,b]=await Promise.all([crypto.subtle.digest('SHA-256',encoder.encode(candidate)),crypto.subtle.digest('SHA-256',encoder.encode(expected))]);const aa=new Uint8Array(a),bb=new Uint8Array(b);let diff=0;for(let i=0;i<aa.length;i++)diff|=aa[i]^bb[i];return diff===0;}
+export async function createAccessToken(secret:string,now=Date.now()){const payload=`${now+ACCESS_DURATION}.${crypto.randomUUID()}`;return `${payload}.${await mac(payload,secret)}`;}
+export async function validAccessToken(token:string|undefined,secret:string,now=Date.now()){if(!token||!secret)return false;const pieces=token.split('.');if(pieces.length!==3)return false;const expiry=Number(pieces[0]);if(!Number.isFinite(expiry)||expiry<=now||expiry>now+ACCESS_DURATION+60000)return false;const signature=await mac(pieces.slice(0,2).join('.'),secret);if(signature.length!==pieces[2].length)return false;let diff=0;for(let i=0;i<signature.length;i++)diff|=signature.charCodeAt(i)^pieces[2].charCodeAt(i);return diff===0;}
+export function safeAccessReturn(value:string|null){return value?.startsWith('/')&&!value.startsWith('//')&&!/[\\\u0000-\u001f\u007f]/.test(value)&&!/^\/(?:access|api\/site-access|signin-with-chatgpt|callback)/.test(value)?value:'/';}
